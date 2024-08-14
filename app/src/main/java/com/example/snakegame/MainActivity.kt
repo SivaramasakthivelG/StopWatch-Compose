@@ -159,7 +159,8 @@ fun StopWatch(
                     }
                 },
                 modifier
-                    .height(50.dp).alpha(if(isClockRunning) 1f else 0f),
+                    .height(50.dp)
+                    .alpha(if (isClockRunning) 1f else 0f),
                 enabled = isClockRunning
             ) {
                 Icon(
@@ -178,7 +179,7 @@ fun StopWatch(
                     .height(50.dp)
 
             ) {
-                Icon(imageVector = Icons.Default.PlayArrow, contentDescription = "Start")
+                Icon(painter = painterResource(id = if(isClockRunning) R.drawable.pause else R.drawable.play), contentDescription = "Start")
             }
 
             Spacer(modifier = Modifier.width(10.dp))
@@ -191,7 +192,8 @@ fun StopWatch(
                     viewModel.clearAll()
                 },
                 modifier
-                    .size(40.dp).alpha(if(isClockRunning) 1f else 0f),
+                    .size(50.dp)
+                    .alpha(if (isClockRunning) 1f else 0f),
                 enabled = isClockRunning
             ) {
                 Icon(imageVector = Icons.Default.Refresh, contentDescription = "reset")
@@ -207,7 +209,7 @@ fun formatTime(timeInMills: Long): String {
     val seconds = (timeInMills / 1000) % 60
     val minutes = (timeInMills / 1000) / 60
     val milliSeconds = (timeInMills % 1000) / 10
-    return String.format("%02d : %02d : %02d", minutes, seconds, milliSeconds)
+    return String.format("%02d : %02d . %02d", minutes, seconds, milliSeconds)
 }
 
 
